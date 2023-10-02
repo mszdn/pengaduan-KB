@@ -6,6 +6,7 @@ import 'dart:io';
 
 import 'package:adumas/core/cache/network.dart';
 import 'package:adumas/screens/pages/home.dart';
+import 'package:adumas/screens/pages2/home.dart';
 import 'package:adumas/widgets/error_handler.dart';
 import 'package:flutter/material.dart';
 
@@ -167,7 +168,7 @@ class AuthService {
 
             Navigator.of(context).pushAndRemoveUntil(
                 // ignore: prefer_const_constructors
-                MaterialPageRoute(builder: (context) => HomeScreen()),
+                MaterialPageRoute(builder: (context) => HomePage()),
                 (Route route) => false);
           });
     } catch (e) {

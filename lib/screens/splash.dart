@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 3),
       () async {
         //LOGINNYA DISINI
-        userMail != null
+        userMail == null
             ? Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (_) => const LoginScreen()),

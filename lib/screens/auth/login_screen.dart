@@ -34,20 +34,20 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // String? userMail;
-  // void checkUser() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? firstName;
+  void checkUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  //   setState(() {
-  //     userMail = prefs.getString('usermail');
-  //   });
-  // }
+    setState(() {
+      firstName = prefs.getString('firstName');
+    });
+  }
 
-  // @override
-  // void initState() {
-  //   checkUser();
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    checkUser();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +168,15 @@ class _LoginScreenState extends State<LoginScreen> {
                        login();
                        SharedPreferences prefs =
                         await SharedPreferences.getInstance();
-                    await prefs.setString("${sessionManager.nToken}","${sessionManager.nNik}");
+                    // await prefs.setString("${firstName}","${sessionManager.nNik}");
+                saveboolvalue  () async
+  {
+    prefs = await SharedPreferences.getInstance();
+    prefs.setBool("firstName", true);
+  }
+  setState(() {
+    saveboolvalue();
+  });
                       // print("object");
                       // SharedPreferences prefs =
                       //     await SharedPreferences.getInstance();
