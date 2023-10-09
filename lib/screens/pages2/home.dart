@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'package:adumas/core/cache/network.dart';
 import 'package:adumas/screens/pages2/createPost.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -98,6 +101,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: navigateToAddPage,
+        
         label: const Text(
           'Add Todo',
           style: TextStyle(
@@ -122,9 +126,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> navigateToAddPage()async {
+    String? nTokenq;
+     SharedPreferences pref = await SharedPreferences.getInstance();
+    nTokenq = pref.getString("token");
+   log(nTokenq.toString());
     final route = MaterialPageRoute(
       builder: (context) => createPostingan (),
     );
+       
     await Navigator.push(context, route);
     setState(() {
       isLoading = true;

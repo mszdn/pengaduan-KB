@@ -165,18 +165,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 GestureDetector(
                   onTap: () async {
                     if (_signInFormKey.currentState!.validate()) {
+                      print(sessionManager.nToken);
                        login();
                        SharedPreferences prefs =
                         await SharedPreferences.getInstance();
-                    // await prefs.setString("${firstName}","${sessionManager.nNik}");
-                saveboolvalue  () async
-  {
-    prefs = await SharedPreferences.getInstance();
-    prefs.setBool("firstName", true);
-  }
-  setState(() {
-    saveboolvalue();
-  });
+                    await prefs.setString("${firstName}","${sessionManager.nNik}");
+   
                       // print("object");
                       // SharedPreferences prefs =
                       //     await SharedPreferences.getInstance();

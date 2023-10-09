@@ -1,5 +1,9 @@
+import 'package:adumas/core/cache/network.dart';
 import 'package:adumas/screens/pages/createpost.dart';
 import 'package:adumas/screens/pages/home.dart';
+import 'package:adumas/screens/pages2/createPost.dart';
+import 'package:adumas/screens/pages2/home.dart';
+import 'package:adumas/screens/pages2/postingan.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 3),
       () async {
         //LOGINNYA DISINI
-        userMail == null
+        sessionManager.nToken == null
             ? Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (_) => const LoginScreen()),
@@ -37,7 +41,10 @@ class _SplashScreenState extends State<SplashScreen> {
             : Navigator.pushAndRemoveUntil(
                 context,
                 // MaterialPageRoute(builder: (_) => const HomeScreen()),
-                MaterialPageRoute(builder: (_) =>  Create()),
+                //POSTINGAN
+                // MaterialPageRoute(builder: (_) =>  Create()),
+
+                MaterialPageRoute(builder: (_) =>  Postinganlelang()),
                 (route) => false);
       },
     );
@@ -52,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // var mediaH = MediaQuery.of(context).size.height;
+    var mediaH = MediaQuery.of(context).size.height;
     var mediaW = MediaQuery.of(context).size.width;
     return Container(
       color: c.white,

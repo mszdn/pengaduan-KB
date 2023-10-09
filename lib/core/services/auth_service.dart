@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:adumas/core/cache/network.dart';
 import 'package:adumas/screens/pages/home.dart';
 import 'package:adumas/screens/pages2/home.dart';
+import 'package:adumas/screens/pages2/postingan.dart';
 import 'package:adumas/widgets/error_handler.dart';
 import 'package:flutter/material.dart';
 
@@ -128,6 +129,20 @@ class AuthService {
           response: res,
           context: context,
           onSuccess: () async {
+            print(datas.toString()); 
+            sessionManager.savePref(
+              datas["token"], 
+            datas["_id"], 
+            datas["userName"]??"", 
+            datas["firstName"]??"", 
+         
+                       datas["nik"]??"", 
+
+                      datas["level"]??"", 
+
+                        datas["phoneNumber"]??"", 
+);
+
             // if (data["user"]["level"] == "masyarakat") {
             //   sessionManager.savePref(
             //     data["token"],
@@ -161,14 +176,11 @@ class AuthService {
             //     data["user"]["phoneNumber"],
             //   );
             // }
-   SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    await prefs.setString("${sessionManager.nToken}","${sessionManager.nNik}");
-            print("stored");
+  
 
             Navigator.of(context).pushAndRemoveUntil(
                 // ignore: prefer_const_constructors
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => Postinganlelang()),
                 (Route route) => false);
           });
     } catch (e) {

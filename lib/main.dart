@@ -1,4 +1,5 @@
 import 'package:adumas/constant/HColor.dart' as c;
+import 'package:adumas/screens/pages2/postingan.dart';
 import 'package:adumas/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
             },
           ),
         ),
-        home: const SplashScreen());
+        home: const Postinganlelang());
+        // home: const SplashScreen());
   }
 }
 class HRoute extends MaterialPageRoute {

@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:adumas/core/cache/network.dart';
+import 'package:adumas/screens/pages/createpost.dart';
+import 'package:adumas/screens/pages2/home.dart';
+import 'package:adumas/screens/pages2/postingan.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -31,9 +35,11 @@ class _createPostinganState extends State<createPostingan> {
   @override
 
   Widget build(BuildContext context) {
+     var mediaH = MediaQuery.of(context).size.height;
+    var mediaW = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amberAccent,
+        backgroundColor: Colors.black,
         title:  Text(
          isEdit?'Edit todo': 'Add todo',
           style: const TextStyle(fontWeight: FontWeight.w600),
@@ -42,6 +48,10 @@ class _createPostinganState extends State<createPostingan> {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
+          InkWell(onTap: () {
+            print("object");
+          },
+            child: IW_AddImage(mediaH: 500, mediaW:mediaW)),
           TextField(
             controller: titleController,
             decoration: const InputDecoration(
@@ -88,10 +98,10 @@ class _createPostinganState extends State<createPostingan> {
     final body = {
       "title": title,
       "description": description,
-      "is_completed": false,
+      "status": false,
     };
     //
-    final url = 'https://api.nstack.in/v1/todos/$id';
+    final url = 'https://api.kontenbase.com/query/api/v1/d4197ca7-322a-4e1c-88fc-abd98133eb48/Postingan/$id?\$lookup=*';
     final uri = Uri.parse(url);
     final response = await http.put(
       uri,
@@ -115,15 +125,15 @@ class _createPostinganState extends State<createPostingan> {
     final body = {
       "title": title,
       "description": description,
-      "is_completed": false,
+      "status": "false",
     };
     //submit data to server
-    const url = 'https://api.nstack.in/v1/todos';
+    const url = 'https://api.kontenbase.com/query/api/v1/d4197ca7-322a-4e1c-88fc-abd98133eb48/Postingan';
     final uri = Uri.parse(url);
     final response = await http.post(
       uri,
       body: jsonEncode(body),
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json', "Authorization": "Bearer 86ccd5a820b3b2b20785162d2e71ac2d"},
     );
     //Map cannot be passed directly hence jsonEncoder converts map array into string
 
@@ -132,6 +142,10 @@ class _createPostinganState extends State<createPostingan> {
       titleController.text='';
       descriptionController.text='';
       showSuccessMessage('Creation Success');
+       Navigator.of(context).pushAndRemoveUntil(
+                // ignore: prefer_const_constructors
+                MaterialPageRoute(builder: (context) => Postinganlelang()),
+                (Route route) => false);
     } else {
       showErrorMessage('Creation Failed');
       if (kDebugMode) {
