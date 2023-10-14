@@ -166,11 +166,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   onTap: () async {
                     if (_signInFormKey.currentState!.validate()) {
                       print(sessionManager.nToken);
-                       login();
-                       SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    await prefs.setString("${firstName}","${sessionManager.nNik}");
-   
+                      login();
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      await prefs.setString(
+                          "${firstName}", "${sessionManager.nNik}");
+
                       // print("object");
                       // SharedPreferences prefs =
                       //     await SharedPreferences.getInstance();
@@ -184,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 60,
                       decoration: BoxDecoration(
                         color: Colors.black,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(25),
                       ),
                       child: Center(
                         child: Text(

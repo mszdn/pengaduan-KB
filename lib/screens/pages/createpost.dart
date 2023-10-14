@@ -618,33 +618,33 @@ class _CreateState extends State<Create> {
   }
 }
 
-Widget IW_AddImage(
-    {required double mediaH, required double mediaW, File? image}) {
-  return DottedBorder(
-    borderType: BorderType.RRect,
-    radius: const Radius.circular(8),
-    padding: const EdgeInsets.all(12),
-    color: Color(0xffFEDC23),
-    child: ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(8)),
-      child: SizedBox(
-        height: mediaH / 3.5,
-        width: mediaW,
-        child: const Center(
-          child: Text(
-            "Tambah Foto",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color(0xffFEDC23),
-              fontSize: 12,
-              fontWeight: FontWeight.w300,
-            ),
-          ),
-        ),
-      ),
-    ),
-  );
-}
+// Widget IW_AddImage(
+//     {required double mediaH, required double mediaW, File? image}) {
+//   return DottedBorder(
+//     borderType: BorderType.RRect,
+//     radius: const Radius.circular(8),
+//     padding: const EdgeInsets.all(12),
+//     color: Colors.black,
+//     child: ClipRRect(
+//       borderRadius: const BorderRadius.all(Radius.circular(8)),
+//       child: SizedBox(
+//         height: mediaH / 3.5,
+//         width: mediaW,
+//         child: const Center(
+//           child: Text(
+//             "Tambah Foto",
+//             textAlign: TextAlign.center,
+//             style: TextStyle(
+//               color: Colors.black,
+//               fontSize: 12,
+//               fontWeight: FontWeight.w300,
+//             ),
+//           ),
+//         ),
+//       ),
+//     ),
+//   );
+// }
 
 Widget IW_Image({
   required double mediaH,

@@ -1,3 +1,4 @@
+import 'package:adumas/screens/pages2/postingan.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -6,14 +7,14 @@ import '../../core/services/auth_service.dart';
 import '../../widgets/my_snackbar.dart';
 import 'login_screen.dart';
 
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({Key? key}) : super(key: key);
+class SignupScreenPetugas extends StatefulWidget {
+  const SignupScreenPetugas({Key? key}) : super(key: key);
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<SignupScreenPetugas> createState() => _SignupScreenPetugasState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _SignupScreenPetugasState extends State<SignupScreenPetugas> {
   final _signupKey = GlobalKey<FormState>();
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
@@ -30,7 +31,7 @@ class _SignupScreenState extends State<SignupScreen> {
         username: usernameController.text,
         password: passwordController.text,
         phoneNumber: phoneNumberController.text,
-        level: "masyarakat",
+        level: "petugas",
         nik: nikController.text);
   }
 
@@ -73,7 +74,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Nama',
+                        'Nama Petugas',
                         style: GoogleFonts.poppins(
                             textStyle: const TextStyle(
                           fontSize: 14,
@@ -95,7 +96,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         height: 20,
                       ),
                       Text(
-                        'Username',
+                        'Username Petugas',
                         style: GoogleFonts.poppins(
                             textStyle: const TextStyle(
                           fontSize: 14,
@@ -210,16 +211,17 @@ class _SignupScreenState extends State<SignupScreen> {
                             } else {
                               Future.delayed(const Duration(seconds: 1));
                               signup();
-                              Navigator.push(
+                              Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoginScreen()));
+                                      builder: (_) => Postinganlelang()),
+                                  (route) => false);
                             }
                           }
                         },
                         child: Center(
                           child: Container(
-                            width: MediaQuery.of(context).size.width / 1.4,
+                            width: MediaQuery.of(context).size.width,
                             height: 60,
                             decoration: BoxDecoration(
                               color: Colors.black,
@@ -244,40 +246,40 @@ class _SignupScreenState extends State<SignupScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Sudah punya akun?',
-                      style: GoogleFonts.poppins(
-                        textStyle: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 5),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginScreen()));
-                      },
-                      child: Text(
-                        'Login!',
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            fontSize: 16,
-                            decoration: TextDecoration.underline,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Text(
+                //       'Sudah punya akun?',
+                //       style: GoogleFonts.poppins(
+                //         textStyle: const TextStyle(
+                //           fontSize: 16,
+                //           fontWeight: FontWeight.w500,
+                //         ),
+                //       ),
+                //     ),
+                //     const SizedBox(width: 5),
+                //     GestureDetector(
+                //       onTap: () {
+                //         Navigator.push(
+                //             context,
+                //             MaterialPageRoute(
+                //                 builder: (context) => LoginScreen()));
+                //       },
+                //       child: Text(
+                //         'Login!',
+                //         style: GoogleFonts.poppins(
+                //           textStyle: const TextStyle(
+                //             fontSize: 16,
+                //             decoration: TextDecoration.underline,
+                //             color: Colors.black,
+                //             fontWeight: FontWeight.w500,
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),

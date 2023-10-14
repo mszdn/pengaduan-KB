@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: navigateToAddPage,
         
         label: const Text(
-          'Add Todo',
+          'Lelangin',
           style: TextStyle(
             color: Colors.black,
           ),
@@ -180,6 +180,7 @@ class _HomePageState extends State<HomePage> {
       isLoading = false;
     });
   }
+
   void showSuccessMessage(String message) {
     final snackBar = SnackBar(
       content: Center(

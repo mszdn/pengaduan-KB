@@ -6,29 +6,26 @@ import 'package:adumas/core/cache/network.dart';
 import 'package:adumas/core/env.dart';
 import 'package:adumas/main.dart';
 import 'package:adumas/screens/auth/login_screen.dart';
-import 'package:adumas/screens/auth/signup_screen_petugas.dart';
 import 'package:adumas/screens/pages2/comments/comment.dart';
 import 'package:adumas/screens/pages2/createPost.dart';
-import 'package:adumas/screens/pages2/postinganSold.dart';
 import 'package:adumas/widgets/WAvatar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../../widgets/Walert_Dialog.dart';
 
-class Postinganlelang extends StatefulWidget {
-  const Postinganlelang({super.key});
+class PostinganlelangHabis extends StatefulWidget {
+  const PostinganlelangHabis({super.key});
 
   @override
-  State<Postinganlelang> createState() => _PostinganlelangState();
+  State<PostinganlelangHabis> createState() => _PostinganlelangHabisState();
 }
 
-class _PostinganlelangState extends State<Postinganlelang> {
+class _PostinganlelangHabisState extends State<PostinganlelangHabis> {
   List items = [];
   bool isLoad = true;
   Dio dio = Dio();
@@ -100,7 +97,6 @@ class _PostinganlelangState extends State<Postinganlelang> {
 
   @override
   void initState() {
-    // level = sessionManager.nLevel;
     getpost();
     setState(() {
       sessionManager.nLevel;
@@ -113,90 +109,44 @@ class _PostinganlelangState extends State<Postinganlelang> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton:
-      //     sessionManager.nLevel == "admin" || sessionManager.nLevel == "petugas"
-      //         ? FloatingActionButton.extended(
-      //             foregroundColor: Colors.black,
-      //             onPressed: () {
-      //               Navigator.of(context, rootNavigator: true).push(
-      //                   HRoute(builder: (context) => const createPostingan()));
-      //             },
-      //             label: const Text(
-      //               'Tambah Lelang',
-      //               style: TextStyle(
-      //                 color: Colors.black,
-      //               ),
-      //             ),
-      //             backgroundColor: Colors.amberAccent,
-      //             elevation: 1,
-      //           )
-      //         : SizedBox(),
-      floatingActionButton:
-          SpeedDial(icon: Icons.add, backgroundColor: Colors.amber, children: [
-        SpeedDialChild(
-          child: const Icon(Icons.toys),
-          label: 'Tambah Lelang',
-          backgroundColor: Colors.amberAccent,
-          onTap: () {
-            Navigator.of(context, rootNavigator: true)
-                .push(HRoute(builder: (context) => const createPostingan()));
-          },
-        ),
-        SpeedDialChild(
-          child: const Icon(Icons.people_alt),
-          label: 'Tambah Petugas',
-          backgroundColor: Colors.amberAccent,
-          onTap: () {
-            Navigator.of(context, rootNavigator: true).push(
-                HRoute(builder: (context) => const SignupScreenPetugas()));
-          },
-        ),
-      ]),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   foregroundColor: Colors.black,
+      //   onPressed: () {
+      //     // Navigator.of(context, rootNavigator: true)
+      //     //     .push(HRoute(builder: (context) => const createPostingan()));
+      //   },
+      //   label: const Text(
+      //     'Tambah Lelang',
+      //     style: TextStyle(
+      //       color: Colors.black,
+      //     ),
+      //   ),
+      //   backgroundColor: Colors.amberAccent,
+      //   elevation: 1,
+      // ),
       appBar: AppBar(
         backgroundColor: Colors.yellow.shade600,
-        leading: sessionManager.nLevel == "admin" ||
-                sessionManager.nLevel == "petugas"
-            ? IconButton(
-                onPressed: () {
-                  Navigator.of(context, rootNavigator: true).push(
-                      HRoute(builder: (context) => PostinganlelangHabis()));
-                },
-                icon: Icon(
-                  Icons.assignment_turned_in_outlined,
-                  color: Colors.black,
-                ))
-            : Icon(
-                Icons.abc,
-                color: Colors.yellow.shade600,
-              ),
+        leading: IconButton(
+            onPressed: () {
+              // Navigator.of(context, rootNavigator: true)
+              //     .push(HRoute(builder: (context) => PostinganlelangHabis()));
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )),
         title: Center(
             child: Text(
-          "Lelangin",
-          // "${level}",
+          "Terjual",
           style: TextStyle(color: Colors.black),
         )),
         actions: [
           IconButton(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) => WDialong_ConfirmAlert(
-                          context,
-                          "Apakah anda ingin Logout?",
-                          onConfirm: () {
-                            sessionManager.clearSession().then((value) =>
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    HRoute(
-                                        builder: (context) =>
-                                            const LoginScreen()),
-                                    (route) => false));
-                          },
-                        ));
-              },
+              onPressed: () {},
               icon: Icon(
                 Icons.exit_to_app,
-                color: Colors.black,
+                color: Colors.yellow.shade600,
               ))
         ],
       ),
@@ -222,88 +172,80 @@ class _PostinganlelangState extends State<Postinganlelang> {
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                p["status"] == "Masih"
+                                p["status"] == "Habis"
                                     ? Column(
                                         children: [
                                           SizedBox(
                                             height: 20,
                                           ),
                                           ListTile(
-                                              leading: WAvatar_Render(
-                                                maxRadius: 22,
-                                                iconSize: 26,
-                                                iconColor: Colors.black54,
+                                            leading: WAvatar_Render(
+                                              maxRadius: 22,
+                                              iconSize: 26,
+                                              iconColor: Colors.black54,
+                                            ),
+                                            title: Row(children: [
+                                              Text(
+                                                p["createdBy"]["firstName"] ??
+                                                    "user".toString(),
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              title: Row(children: [
-                                                Text(
-                                                  p["createdBy"]["firstName"] ??
-                                                      "user".toString(),
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  DateFormat.Hm().format(
-                                                      DateTime.parse(
-                                                              p["createdAt"])
-                                                          .toLocal()),
-                                                  // v["createdAt"],
-                                                  style: const TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 10),
-                                                ),
-                                                Spacer(),
-                                              ]),
-                                              trailing: sessionManager.nLevel ==
-                                                          "admin" ||
-                                                      sessionManager.nLevel ==
-                                                          "petugas"
-                                                  ? PopupMenuButton(
-                                                      onSelected: (value) {
-                                                        if (value == 'edit') {
-                                                          //open edit page
-                                                          navigateToEditPage(
-                                                            p,
-                                                            p["attachment"][0]
-                                                                ["url"],
-                                                          );
-                                                        } else if (value ==
-                                                            'delete') {
-                                                          //open delete page
-                                                          // deleteById(id);
-                                                          showDialog(
-                                                              context: context,
-                                                              builder: (context) =>
-                                                                  WDialong_ConfirmAlert(
-                                                                    context,
-                                                                    "Yakin ingin menghapus?",
-                                                                    onConfirm:
-                                                                        () {
-                                                                      deletePost(
-                                                                          p["_id"]);
-                                                                    },
-                                                                  ));
-                                                        }
-                                                      },
-                                                      itemBuilder: (context) {
-                                                        return [
-                                                          const PopupMenuItem(
-                                                            value: 'edit',
-                                                            child: Text('Edit'),
-                                                          ),
-                                                          const PopupMenuItem(
-                                                            value: 'delete',
-                                                            child:
-                                                                Text('Hapus'),
-                                                          ),
-                                                        ];
-                                                      },
-                                                    )
-                                                  : SizedBox()),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                DateFormat.Hm().format(
+                                                    DateTime.parse(
+                                                            p["createdAt"])
+                                                        .toLocal()),
+                                                // v["createdAt"],
+                                                style: const TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 10),
+                                              ),
+                                              Spacer(),
+                                            ]),
+                                            trailing: PopupMenuButton(
+                                              onSelected: (value) {
+                                                if (value == 'edit') {
+                                                  //open edit page
+                                                  navigateToEditPage(
+                                                    p,
+                                                    p["attachment"][0]["url"],
+                                                  );
+                                                } else if (value == 'delete') {
+                                                  //open delete page
+                                                  // deleteById(id);
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          WDialong_ConfirmAlert(
+                                                            context,
+                                                            "Yakin ingin menghapus?",
+                                                            onConfirm: () {
+                                                              deletePost(
+                                                                  p["_id"]);
+                                                            },
+                                                          ));
+                                                }
+                                              },
+                                              itemBuilder: (context) {
+                                                return [
+                                                  const PopupMenuItem(
+                                                    value: 'edit',
+                                                    child: Text('Edit'),
+                                                  ),
+                                                  const PopupMenuItem(
+                                                    value: 'delete',
+                                                    child: Text('Hapus'),
+                                                  ),
+                                                ];
+                                              },
+                                            ),
+                                          ),
                                           SizedBox(
                                             height: 10,
                                           ),

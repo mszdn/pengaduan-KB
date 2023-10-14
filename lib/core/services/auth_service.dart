@@ -48,6 +48,7 @@ class AuthService {
           username: username,
           phoneNumber: phoneNumber,
           nik: nik,
+          level: level,
           idU: _id);
 
       httpErrorHandler(
@@ -69,6 +70,7 @@ class AuthService {
     required String username,
     required String phoneNumber,
     required String nik,
+    required String level,
   }) async {
     try {
       var token = await getSysToken();
@@ -79,6 +81,7 @@ class AuthService {
             "username": username,
             "phoneNumber": phoneNumber,
             "nik": nik,
+            "level": level,
             "users": [idU]
           }),
           headers: {'Authorization': "Bearer $token"});
@@ -180,13 +183,15 @@ class AuthService {
       //     (Route route) => false);
       //     });
       if (res.statusCode == 200) {
+        // log(datas);
+        print(datas);
         sessionManager.savePref(
           datas["token"],
           datas["user"]["_id"],
           datas["user"]["email"] ?? "",
           datas["user"]["firstName"] ?? "",
-          datas["user"]["level"] ?? "",
           datas["user"]["nik"] ?? "",
+          datas["user"]["level"] ?? "",
           datas["user"]["phoneNumber"] ?? "",
         );
         Navigator.of(context).pushAndRemoveUntil(
