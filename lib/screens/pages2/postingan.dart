@@ -131,27 +131,36 @@ class _PostinganlelangState extends State<Postinganlelang> {
       //             elevation: 1,
       //           )
       //         : SizedBox(),
-      floatingActionButton:
-          SpeedDial(icon: Icons.add, backgroundColor: Colors.amber, children: [
-        SpeedDialChild(
-          child: const Icon(Icons.toys),
-          label: 'Tambah Lelang',
-          backgroundColor: Colors.amberAccent,
-          onTap: () {
-            Navigator.of(context, rootNavigator: true)
-                .push(HRoute(builder: (context) => const createPostingan()));
-          },
-        ),
-        SpeedDialChild(
-          child: const Icon(Icons.people_alt),
-          label: 'Tambah Petugas',
-          backgroundColor: Colors.amberAccent,
-          onTap: () {
-            Navigator.of(context, rootNavigator: true).push(
-                HRoute(builder: (context) => const SignupScreenPetugas()));
-          },
-        ),
-      ]),
+      floatingActionButton: sessionManager.nLevel == "petugas" ||
+              sessionManager.nLevel == "admin"
+          ? SpeedDial(
+              icon: Icons.add,
+              backgroundColor: Colors.amber,
+              children: [
+                  SpeedDialChild(
+                    child: const Icon(Icons.toys),
+                    label: 'Tambah Lelang',
+                    backgroundColor: Colors.amberAccent,
+                    onTap: () {
+                      Navigator.of(context, rootNavigator: true).push(HRoute(
+                          builder: (context) => const createPostingan()));
+                    },
+                  ),
+                  sessionManager.nLevel == "admin"
+                      ? SpeedDialChild(
+                          child: const Icon(Icons.people_alt),
+                          label: 'Tambah Petugas',
+                          backgroundColor: Colors.amberAccent,
+                          onTap: () {
+                            Navigator.of(context, rootNavigator: true).push(
+                                HRoute(
+                                    builder: (context) =>
+                                        const SignupScreenPetugas()));
+                          },
+                        )
+                      : SpeedDialChild()
+                ])
+          : SizedBox(),
       appBar: AppBar(
         backgroundColor: Colors.yellow.shade600,
         leading: sessionManager.nLevel == "admin" ||
