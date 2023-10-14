@@ -10,6 +10,7 @@ import 'package:adumas/screens/auth/signup_screen_petugas.dart';
 import 'package:adumas/screens/pages2/comments/comment.dart';
 import 'package:adumas/screens/pages2/createPost.dart';
 import 'package:adumas/screens/pages2/postinganSold.dart';
+import 'package:adumas/screens/pages2/printToPdf.dart/cat.dart';
 import 'package:adumas/widgets/WAvatar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -113,54 +114,36 @@ class _PostinganlelangState extends State<Postinganlelang> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton:
-      //     sessionManager.nLevel == "admin" || sessionManager.nLevel == "petugas"
-      //         ? FloatingActionButton.extended(
-      //             foregroundColor: Colors.black,
-      //             onPressed: () {
-      //               Navigator.of(context, rootNavigator: true).push(
-      //                   HRoute(builder: (context) => const createPostingan()));
-      //             },
-      //             label: const Text(
-      //               'Tambah Lelang',
-      //               style: TextStyle(
-      //                 color: Colors.black,
-      //               ),
-      //             ),
-      //             backgroundColor: Colors.amberAccent,
-      //             elevation: 1,
-      //           )
-      //         : SizedBox(),
-      floatingActionButton: sessionManager.nLevel == "petugas" ||
-              sessionManager.nLevel == "admin"
-          ? SpeedDial(
-              icon: Icons.add,
-              backgroundColor: Colors.amber,
-              children: [
-                  SpeedDialChild(
-                    child: const Icon(Icons.toys),
-                    label: 'Tambah Lelang',
-                    backgroundColor: Colors.amberAccent,
-                    onTap: () {
-                      Navigator.of(context, rootNavigator: true).push(HRoute(
-                          builder: (context) => const createPostingan()));
-                    },
-                  ),
-                  sessionManager.nLevel == "admin"
-                      ? SpeedDialChild(
-                          child: const Icon(Icons.people_alt),
-                          label: 'Tambah Petugas',
-                          backgroundColor: Colors.amberAccent,
-                          onTap: () {
-                            Navigator.of(context, rootNavigator: true).push(
-                                HRoute(
-                                    builder: (context) =>
-                                        const SignupScreenPetugas()));
-                          },
-                        )
-                      : SpeedDialChild()
-                ])
-          : SizedBox(),
+      floatingActionButton:
+          sessionManager.nLevel == "petugas" || sessionManager.nLevel == "admin"
+              ? SpeedDial(
+                  icon: Icons.add,
+                  backgroundColor: Colors.amber,
+                  children: [
+                      SpeedDialChild(
+                        child: const Icon(Icons.toys),
+                        label: 'Tambah Lelang',
+                        backgroundColor: Colors.amberAccent,
+                        onTap: () {
+                          Navigator.of(context, rootNavigator: true).push(
+                              HRoute(builder: (context) => createPostingan()));
+                        },
+                      ),
+                      sessionManager.nLevel == "admin"
+                          ? SpeedDialChild(
+                              child: const Icon(Icons.people_alt),
+                              label: 'Tambah Petugas',
+                              backgroundColor: Colors.amberAccent,
+                              onTap: () {
+                                Navigator.of(context, rootNavigator: true).push(
+                                    HRoute(
+                                        builder: (context) =>
+                                            const SignupScreenPetugas()));
+                              },
+                            )
+                          : SpeedDialChild()
+                    ])
+              : SizedBox(),
       appBar: AppBar(
         backgroundColor: Colors.yellow.shade600,
         leading: sessionManager.nLevel == "admin" ||

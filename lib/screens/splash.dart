@@ -104,7 +104,10 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           children: [
             const Spacer(),
-            Icon(Icons.adobe_rounded, size: mediaW / 2),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Image.asset("assets/icon/LogoLelanginRm.png"),
+            ),
             const Spacer(),
           ],
         ),
