@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import '../../core/services/complaint_service.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
+
 class Create extends StatefulWidget {
   const Create({
     Key? key,
@@ -51,8 +52,9 @@ class _CreateState extends State<Create> {
       );
     });
   }
+
   File? imageFile;
-_getCamerraPhoto() async {
+  _getCamerraPhoto() async {
     XFile? image = await ImagePicker().pickImage(
         source: ImageSource.camera,
         imageQuality: 50,
@@ -72,11 +74,12 @@ _getCamerraPhoto() async {
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
- double mediaW = MediaQuery.of(context).size.width;
+    double mediaW = MediaQuery.of(context).size.width;
     double mediaH = MediaQuery.of(context).size.height;
-        return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text("Buat Postingan Lelang"),
         backgroundColor: Colors.black,
@@ -93,352 +96,373 @@ _getCamerraPhoto() async {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-GestureDetector(onTap: () {
-  Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          height: MediaQuery.of(context).size.height / 18,
-                          width: MediaQuery.of(context).size.width,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    backgroundColor: Colors.black,
-                                    title: Text(
-                                      'Pilih Sumber Upload',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    content: const Text(''),
-                                    actions: <Widget>[
-                                      SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                8,
-                                        child: Row(
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () async {
-                                                setState(() {
-                                                  // isLoading = true;
-                                                });
-                                                // Position position =
-                                                //     await _getGeoLocationPosition();
-                                                // setState(() {
-                                                //   lokasi =
-                                                //       "${position.latitude} ${position.longitude}";
-                                                //   print(
-                                                //       "INI LATLONG BOLO ${lokasi}");
-                                                // });
-                                                // getAddressFromLongLat(
-                                                //     position);
-                                                setState(() {
-                                                  // isLoading = false;
-                                                });
-                                                Navigator.pop(context);
-                                                // Navigator.push(
-                                                //     context,
-                                                //     MaterialPageRoute(
-                                                //         builder: (context) =>
-                                                //             NewPostScreen(
-                                                //               kabupaten:
-                                                //                   kabupaten,
-                                                //               kecamatan:
-                                                //                   kecamatan,
-                                                //               provinsi:
-                                                //                   provinsi,
-                                                //               location: lokasi,
-                                                //               alamatLengkap:
-                                                //                   lokasiLengkap,
-                                                //             )));
-                                              },
-                                              child: Container(
-                                                width: mediaW / 3.4,
-                                                height: mediaH / 7,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.red,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            16)),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.image,
-                                                      size: mediaW / 7,
-                                                      color: Colors.white,
-                                                    ),
-                                                    const Text(
-                                                      'Pilih Dari Galeri',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 12),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
+                      GestureDetector(
+                          onTap: () {
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                height: MediaQuery.of(context).size.height / 18,
+                                width: MediaQuery.of(context).size.width,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          backgroundColor: Colors.black,
+                                          title: Text(
+                                            'Pilih Sumber Upload',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          content: const Text(''),
+                                          actions: <Widget>[
                                             SizedBox(
-                                              width: mediaW / 20,
-                                            ),
-                                            GestureDetector(
-                                              onTap: () async {
-                                                // setState(() {
-                                                //   isLoading = true;
-                                                // });
-                                                // Position position =
-                                                //     await _getGeoLocationPosition();
-                                                // setState(() {
-                                                //   lokasi =
-                                                //       "${position.latitude} ${position.longitude}";
-                                                //   print(
-                                                //       "INI LATLONG BOLO ${lokasi}");
-                                                // });
-                                                // getAddressFromLongLat(
-                                                //     position);
-                                                // setState(() {
-                                                //   isLoading = false;
-                                                // });
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  8,
+                                              child: Row(
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () async {
+                                                      setState(() {
+                                                        // isLoading = true;
+                                                      });
+                                                      // Position position =
+                                                      //     await _getGeoLocationPosition();
+                                                      // setState(() {
+                                                      //   lokasi =
+                                                      //       "${position.latitude} ${position.longitude}";
+                                                      //   print(
+                                                      //       "INI LATLONG BOLO ${lokasi}");
+                                                      // });
+                                                      // getAddressFromLongLat(
+                                                      //     position);
+                                                      setState(() {
+                                                        // isLoading = false;
+                                                      });
+                                                      Navigator.pop(context);
+                                                      // Navigator.push(
+                                                      //     context,
+                                                      //     MaterialPageRoute(
+                                                      //         builder: (context) =>
+                                                      //             NewPostScreen(
+                                                      //               kabupaten:
+                                                      //                   kabupaten,
+                                                      //               kecamatan:
+                                                      //                   kecamatan,
+                                                      //               provinsi:
+                                                      //                   provinsi,
+                                                      //               location: lokasi,
+                                                      //               alamatLengkap:
+                                                      //                   lokasiLengkap,
+                                                      //             )));
+                                                    },
+                                                    child: Container(
+                                                      width: mediaW / 3.4,
+                                                      height: mediaH / 7,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.red,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      16)),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons.image,
+                                                            size: mediaW / 7,
+                                                            color: Colors.white,
+                                                          ),
+                                                          const Text(
+                                                            'Pilih Dari Galeri',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize: 12),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: mediaW / 20,
+                                                  ),
+                                                  GestureDetector(
+                                                    onTap: () async {
+                                                      // setState(() {
+                                                      //   isLoading = true;
+                                                      // });
+                                                      // Position position =
+                                                      //     await _getGeoLocationPosition();
+                                                      // setState(() {
+                                                      //   lokasi =
+                                                      //       "${position.latitude} ${position.longitude}";
+                                                      //   print(
+                                                      //       "INI LATLONG BOLO ${lokasi}");
+                                                      // });
+                                                      // getAddressFromLongLat(
+                                                      //     position);
+                                                      // setState(() {
+                                                      //   isLoading = false;
+                                                      // });
 
-                                                _getCamerraPhoto();
-                                                Navigator.pop(context);
-                                                // Navigator.push(
-                                                //     context,
-                                                //     MaterialPageRoute(
-                                                //         builder: (context) =>
-                                                //             NewPostScreen(
-                                                //               kabupaten:
-                                                //                   kabupaten,
-                                                //               kecamatan:
-                                                //                   kecamatan,
-                                                //               provinsi:
-                                                //                   provinsi,
-                                                //               location:
-                                                //                   lokasi,
-                                                //               alamatLengkap:
-                                                //                   lokasiLengkap,
-                                                //             )));
-                                              },
-                                              child: Container(
-                                                width: mediaW / 3.4,
-                                                height: mediaH / 7,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.red,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            16)),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.camera_alt_rounded,
-                                                      size: mediaW / 7,
-                                                      color: Colors.white,
+                                                      _getCamerraPhoto();
+                                                      Navigator.pop(context);
+                                                      // Navigator.push(
+                                                      //     context,
+                                                      //     MaterialPageRoute(
+                                                      //         builder: (context) =>
+                                                      //             NewPostScreen(
+                                                      //               kabupaten:
+                                                      //                   kabupaten,
+                                                      //               kecamatan:
+                                                      //                   kecamatan,
+                                                      //               provinsi:
+                                                      //                   provinsi,
+                                                      //               location:
+                                                      //                   lokasi,
+                                                      //               alamatLengkap:
+                                                      //                   lokasiLengkap,
+                                                      //             )));
+                                                    },
+                                                    child: Container(
+                                                      width: mediaW / 3.4,
+                                                      height: mediaH / 7,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.red,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      16)),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons
+                                                                .camera_alt_rounded,
+                                                            size: mediaW / 7,
+                                                            color: Colors.white,
+                                                          ),
+                                                          const Text(
+                                                            'Ambil Foto',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize: 12),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                    const Text(
-                                                      'Ambil Foto',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 12),
-                                                    ),
-                                                  ],
-                                                ),
+                                                  )
+                                                ],
                                               ),
                                             )
                                           ],
-                                        ),
-                                      )
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red),
-                            child: const Text(
-                              'Photo',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      );
-},
-  child: GestureDetector(onTap: () {
-       showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    // backgroundColor: c.black,
-                                    title: Text(
-                                      'Pilih Sumber Upload',
-                                      style: TextStyle(
-                                          // color: c.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    content: const Text(''),
-                                    actions: <Widget>[
-                                      SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                8,
-                                        child: Row(
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () async {
-                                                setState(() {
-                                                  // isLoading = true;
-                                                });
-                                                // Position position =
-                                                //     await _getGeoLocationPosition();
-                                                // setState(() {
-                                                //   lokasi =
-                                                //       "${position.latitude} ${position.longitude}";
-                                                //   print(
-                                                //       "INI LATLONG BOLO ${lokasi}");
-                                                // });
-                                                // getAddressFromLongLat(
-                                                //     position);
-                                                setState(() {
-                                                  // isLoading = false;
-                                                });
-                                                Navigator.pop(context);
-                                                // Navigator.push(
-                                                //     context,
-                                                //     MaterialPageRoute(
-                                                //         builder: (context) =>
-                                                //             NewPostScreen(
-                                                //               kabupaten:
-                                                //                   kabupaten,
-                                                //               kecamatan:
-                                                //                   kecamatan,
-                                                //               provinsi:
-                                                //                   provinsi,
-                                                //               location: lokasi,
-                                                //               alamatLengkap:
-                                                //                   lokasiLengkap,
-                                                //             )));
-                                              },
-                                              child: Container(
-                                                width: mediaW / 3.4,
-                                                height: mediaH / 7,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.red,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            16)),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.image,
-                                                      size: mediaW / 7,
-                                                      color: Colors.white,
-                                                    ),
-                                                    const Text(
-                                                      'Pilih Dari Galeri',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 12),
-                                                    ),
-                                                  ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.red),
+                                  child: const Text(
+                                    'Photo',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          child: GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      // backgroundColor: c.black,
+                                      title: Text(
+                                        'Pilih Sumber Upload',
+                                        style: TextStyle(
+                                            // color: c.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      content: const Text(''),
+                                      actions: <Widget>[
+                                        SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              8,
+                                          child: Row(
+                                            children: [
+                                              GestureDetector(
+                                                onTap: () async {
+                                                  setState(() {
+                                                    // isLoading = true;
+                                                  });
+                                                  // Position position =
+                                                  //     await _getGeoLocationPosition();
+                                                  // setState(() {
+                                                  //   lokasi =
+                                                  //       "${position.latitude} ${position.longitude}";
+                                                  //   print(
+                                                  //       "INI LATLONG BOLO ${lokasi}");
+                                                  // });
+                                                  // getAddressFromLongLat(
+                                                  //     position);
+                                                  setState(() {
+                                                    // isLoading = false;
+                                                  });
+                                                  Navigator.pop(context);
+                                                  // Navigator.push(
+                                                  //     context,
+                                                  //     MaterialPageRoute(
+                                                  //         builder: (context) =>
+                                                  //             NewPostScreen(
+                                                  //               kabupaten:
+                                                  //                   kabupaten,
+                                                  //               kecamatan:
+                                                  //                   kecamatan,
+                                                  //               provinsi:
+                                                  //                   provinsi,
+                                                  //               location: lokasi,
+                                                  //               alamatLengkap:
+                                                  //                   lokasiLengkap,
+                                                  //             )));
+                                                },
+                                                child: Container(
+                                                  width: mediaW / 3.4,
+                                                  height: mediaH / 7,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.red,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16)),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.image,
+                                                        size: mediaW / 7,
+                                                        color: Colors.white,
+                                                      ),
+                                                      const Text(
+                                                        'Pilih Dari Galeri',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 12),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            SizedBox(
-                                              width: mediaW / 20,
-                                            ),
-                                            GestureDetector(
-                                              onTap: () async {
-                                                // setState(() {
-                                                //   isLoading = true;
-                                                // });
-                                                // Position position =
-                                                //     await _getGeoLocationPosition();
-                                                // setState(() {
-                                                //   lokasi =
-                                                //       "${position.latitude} ${position.longitude}";
-                                                //   print(
-                                                //       "INI LATLONG BOLO ${lokasi}");
-                                                // });
-                                                // getAddressFromLongLat(
-                                                //     position);
-                                                // setState(() {
-                                                //   isLoading = false;
-                                                // });
+                                              SizedBox(
+                                                width: mediaW / 20,
+                                              ),
+                                              GestureDetector(
+                                                onTap: () async {
+                                                  // setState(() {
+                                                  //   isLoading = true;
+                                                  // });
+                                                  // Position position =
+                                                  //     await _getGeoLocationPosition();
+                                                  // setState(() {
+                                                  //   lokasi =
+                                                  //       "${position.latitude} ${position.longitude}";
+                                                  //   print(
+                                                  //       "INI LATLONG BOLO ${lokasi}");
+                                                  // });
+                                                  // getAddressFromLongLat(
+                                                  //     position);
+                                                  // setState(() {
+                                                  //   isLoading = false;
+                                                  // });
 
-                                                _getCamerraPhoto();
-                                                Navigator.pop(context);
-                                                // Navigator.push(
-                                                //     context,
-                                                //     MaterialPageRoute(
-                                                //         builder: (context) =>
-                                                //             NewPostScreen(
-                                                //               kabupaten:
-                                                //                   kabupaten,
-                                                //               kecamatan:
-                                                //                   kecamatan,
-                                                //               provinsi:
-                                                //                   provinsi,
-                                                //               location:
-                                                //                   lokasi,
-                                                //               alamatLengkap:
-                                                //                   lokasiLengkap,
-                                                //             )));
-                                              },
-                                              child: Container(
-                                                width: mediaW / 3.4,
-                                                height: mediaH / 7,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.red,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            16)),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.camera_alt_rounded,
-                                                      size: mediaW / 7,
-                                                      color: Colors.white,
-                                                    ),
-                                                    const Text(
-                                                      'Ambil Foto',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 12),
-                                                    ),
-                                                  ],
+                                                  _getCamerraPhoto();
+                                                  Navigator.pop(context);
+                                                  // Navigator.push(
+                                                  //     context,
+                                                  //     MaterialPageRoute(
+                                                  //         builder: (context) =>
+                                                  //             NewPostScreen(
+                                                  //               kabupaten:
+                                                  //                   kabupaten,
+                                                  //               kecamatan:
+                                                  //                   kecamatan,
+                                                  //               provinsi:
+                                                  //                   provinsi,
+                                                  //               location:
+                                                  //                   lokasi,
+                                                  //               alamatLengkap:
+                                                  //                   lokasiLengkap,
+                                                  //             )));
+                                                },
+                                                child: Container(
+                                                  width: mediaW / 3.4,
+                                                  height: mediaH / 7,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.red,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16)),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Icon(
+                                                        Icons
+                                                            .camera_alt_rounded,
+                                                        size: mediaW / 7,
+                                                        color: Colors.white,
+                                                      ),
+                                                      const Text(
+                                                        'Ambil Foto',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 12),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  );
-                                },
-                              );
-  },
-    child: IW_Image(mediaH: mediaH, mediaW: mediaW,))),
-SizedBox(height: 20,),
-                       Text(
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              child: IW_Image(
+                                mediaH: mediaH,
+                                mediaW: mediaW,
+                              ))),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
                         'Deskripsi',
                         style: TextStyle(
                           color: Colors.grey,
@@ -594,8 +618,8 @@ SizedBox(height: 20,),
   }
 }
 
-
-Widget IW_AddImage({required double mediaH, required double mediaW}) {
+Widget IW_AddImage(
+    {required double mediaH, required double mediaW, File? image}) {
   return DottedBorder(
     borderType: BorderType.RRect,
     radius: const Radius.circular(8),
@@ -622,12 +646,12 @@ Widget IW_AddImage({required double mediaH, required double mediaW}) {
   );
 }
 
-Widget IW_Image(
-    {required double mediaH,
-    required double mediaW,
-    // required File image,
-    // required int index
-    }) {
+Widget IW_Image({
+  required double mediaH,
+  required double mediaW,
+  // required File image,
+  // required int index
+}) {
   return Container(
     margin: EdgeInsets.only(right: mediaH / 190),
     child: DottedBorder(

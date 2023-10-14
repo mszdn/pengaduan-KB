@@ -20,27 +20,29 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
           appBarTheme: AppBarTheme(
-            iconTheme: IconThemeData(color: c.white),
+              iconTheme: IconThemeData(color: c.white),
               titleTextStyle: GoogleFonts.poppins(
                   textStyle: TextStyle(
-            color: c.white,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ))),
+                color: c.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ))),
           pageTransitionsTheme: const PageTransitionsTheme(
             builders: <TargetPlatform, PageTransitionsBuilder>{
               TargetPlatform.android: CupertinoPageTransitionsBuilder(),
             },
           ),
         ),
-        home: const Postinganlelang());
-        // home: const SplashScreen());
+        // home: const Postinganlelang());
+        home: const SplashScreen());
   }
 }
+
 class HRoute extends MaterialPageRoute {
   HRoute({builder}) : super(builder: builder);
 
   @override
   Duration get transitionDuration => Navigation_Route_Duration;
 }
+
 const Navigation_Route_Duration = Duration(milliseconds: 600);

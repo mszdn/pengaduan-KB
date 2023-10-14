@@ -1,3 +1,4 @@
+import 'package:adumas/constant/Hroute.dart';
 import 'package:adumas/core/cache/network.dart';
 import 'package:adumas/screens/pages/createpost.dart';
 import 'package:adumas/screens/pages/home.dart';
@@ -5,6 +6,7 @@ import 'package:adumas/screens/pages2/createPost.dart';
 import 'package:adumas/screens/pages2/home.dart';
 import 'package:adumas/screens/pages2/postingan.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constant/HColor.dart' as c;
@@ -28,26 +30,61 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  void onSession() async {
-    Future.delayed(
-      const Duration(seconds: 3),
-      () async {
-        //LOGINNYA DISINI
-        sessionManager.nToken == null
-            ? Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (_) => const LoginScreen()),
-                (route) => false)
-            : Navigator.pushAndRemoveUntil(
-                context,
-                // MaterialPageRoute(builder: (_) => const HomeScreen()),
-                //POSTINGAN
-                // MaterialPageRoute(builder: (_) =>  Create()),
+  // void onSession() async {
+  //   Future.delayed(
+  //     const Duration(seconds: 3),
+  //     () async {
+  //       //LOGINNYA DISINI
+  //       sessionManager.nToken == null
+  //           ? Navigator.pushAndRemoveUntil(
+  //               context,
+  //               MaterialPageRoute(builder: (_) => const LoginScreen()),
+  //               (route) => false)
+  //           : Navigator.pushAndRemoveUntil(
+  //               context,
+  //               // MaterialPageRoute(builder: (_) => const HomeScreen()),
+  //               //POSTINGAN
+  //               // MaterialPageRoute(builder: (_) =>  Create()),
 
-                MaterialPageRoute(builder: (_) =>  Postinganlelang()),
+  //               MaterialPageRoute(builder: (_) =>  Postinganlelang()),
+  //               (route) => false);
+  //     },
+  //   );
+  // }
+  void onSession() async {
+    if (await Permission.ignoreBatteryOptimizations.isDenied) {
+      await Permission.ignoreBatteryOptimizations.request();
+    }
+    if (await Permission.phone.isDenied) {
+      await Permission.phone.request();
+    }
+    if (await Permission.storage.isDenied) await Permission.storage.request();
+    if (await Permission.camera.isDenied) await Permission.camera.request();
+
+    Future.delayed(const Duration(seconds: 3), () {
+      sessionManager.getPref().then((value) {
+        if (value == null || value == false) {
+          print("signin false");
+          Navigator.pushAndRemoveUntil(context,
+              MyRoute(builder: (_) => const LoginScreen()), (route) => false);
+        } else if (value != null) {
+          print("signin true");
+          if (mounted) {
+            // Navigator.pushAndRemoveUntil(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (_) => WNavigationBar(
+            //               userId: value,
+            //             )),
+            //     (route) => false);
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => Postinganlelang()),
                 (route) => false);
-      },
-    );
+          }
+        }
+      });
+    });
   }
 
   @override

@@ -95,7 +95,7 @@ class AuthService {
     }
   }
 
-  void login({
+  Future login({
     required BuildContext context,
     required String email,
     required String password,
@@ -117,74 +117,85 @@ class AuthService {
 
       var ids = data["user"]["_id"];
 
-    
+      // http.Response getUser = await http.get(
+      //     Uri.parse('$kbApi/Users/$ids?\$lookup[*]=*'),
+      //     headers: {"Authorization": "Bearer $token"});
 
-      http.Response getUser = await http.get(
-          Uri.parse('$kbApi/Users/$ids?\$lookup[*]=*'),
-          headers: {"Authorization": "Bearer $token"});
+      var datas = jsonDecode(res.body);
 
-      var datas = jsonDecode(getUser.body);
+      // httpErrorHandler(
+      //     response: res,
+      //     context: context,
+      //     onSuccess: () async {
+      //       print("${datas} woiii");
+      //       print("${datas["user"]["_id"]} woiiiid");
+      //       print("${datas["token"]} woiiitoken");
+      //       sessionManager.savePref(
+      //         datas["token"],
+      //         datas["user"]["_id"],
+      //         datas["user"]["email"] ?? "",
+      //         datas["user"]["firstName"] ?? "",
+      //         datas["user"]["level"] ?? "",
+      //         datas["user"]["nik"] ?? "",
+      //         datas["user"]["phoneNumber"] ?? "",
+      //       );
 
-      httpErrorHandler(
-          response: res,
-          context: context,
-          onSuccess: () async {
-            print(datas.toString()); 
-            sessionManager.savePref(
-              datas["token"], 
-            datas["_id"], 
-            datas["userName"]??"", 
-            datas["firstName"]??"", 
-         
-                       datas["nik"]??"", 
+      //       // if (data["user"]["level"] == "masyarakat") {
+      //       //   sessionManager.savePref(
+      //       //     data["token"],
+      //       //     data["user"]["_id"],
+      //       //     datas["masyarakat"][0]["userName"],
+      //       //     datas["masyarakat"][0]["name"],
+      //       //     datas["masyarakat"][0]["nik"],
+      //       //     data["user"]["level"],
+      //       //     data["user"]["phoneNumber"],
+      //       //   );
+      //       // }
+      //       // if (data["user"]["level"] == "petugas") {
+      //       //   sessionManager.savePref(
+      //       //     data["token"],
+      //       //     data["user"]["_id"],
+      //       //     datas["petugas"][0]["userName"],
+      //       //     datas["petugas"][0]["name"],
+      //       //     datas["petugas"][0]["nik"],
+      //       //     datas["petugas"][0]["level"],
+      //       //     data["user"]["phoneNumber"],
+      //       //   );
+      //       // }
+      //       //   if (data["user"]["level"] == "admin") {
+      //       //   sessionManager.savePref(
+      //       //     data["token"],
+      //       //     data["user"]["_id"],
+      //       //     datas["petugas"][0]["userName"],
+      //       //     datas["petugas"][0]["name"],
+      //       //     datas["petugas"][0]["nik"],
+      //       //     datas["petugas"][0]["level"],
+      //       //     data["user"]["phoneNumber"],
+      //       //   );
+      //       // }
 
-                      datas["level"]??"", 
-
-                        datas["phoneNumber"]??"", 
-);
-
-            // if (data["user"]["level"] == "masyarakat") {
-            //   sessionManager.savePref(
-            //     data["token"],
-            //     data["user"]["_id"],
-            //     datas["masyarakat"][0]["userName"],
-            //     datas["masyarakat"][0]["name"],
-            //     datas["masyarakat"][0]["nik"],
-            //     data["user"]["level"],
-            //     data["user"]["phoneNumber"],
-            //   );
-            // }
-            // if (data["user"]["level"] == "petugas") {
-            //   sessionManager.savePref(
-            //     data["token"],
-            //     data["user"]["_id"],
-            //     datas["petugas"][0]["userName"],
-            //     datas["petugas"][0]["name"],
-            //     datas["petugas"][0]["nik"],
-            //     datas["petugas"][0]["level"],
-            //     data["user"]["phoneNumber"],
-            //   );
-            // }
-            //   if (data["user"]["level"] == "admin") {
-            //   sessionManager.savePref(
-            //     data["token"],
-            //     data["user"]["_id"],
-            //     datas["petugas"][0]["userName"],
-            //     datas["petugas"][0]["name"],
-            //     datas["petugas"][0]["nik"],
-            //     datas["petugas"][0]["level"],
-            //     data["user"]["phoneNumber"],
-            //   );
-            // }
-  
-
-            Navigator.of(context).pushAndRemoveUntil(
-                // ignore: prefer_const_constructors
-                MaterialPageRoute(builder: (context) => Postinganlelang()),
-                (Route route) => false);
-          });
+      // Navigator.of(context).pushAndRemoveUntil(
+      //     // ignore: prefer_const_constructors
+      //     MaterialPageRoute(builder: (context) => Postinganlelang()),
+      //     (Route route) => false);
+      //     });
+      if (res.statusCode == 200) {
+        sessionManager.savePref(
+          datas["token"],
+          datas["user"]["_id"],
+          datas["user"]["email"] ?? "",
+          datas["user"]["firstName"] ?? "",
+          datas["user"]["level"] ?? "",
+          datas["user"]["nik"] ?? "",
+          datas["user"]["phoneNumber"] ?? "",
+        );
+        Navigator.of(context).pushAndRemoveUntil(
+            // ignore: prefer_const_constructors
+            MaterialPageRoute(builder: (context) => Postinganlelang()),
+            (Route route) => false);
+      }
     } catch (e) {
-    log(e.toString());
+      log(e.toString());
     }
   }
 }

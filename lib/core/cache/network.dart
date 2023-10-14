@@ -1,13 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NetworkHandler {
-  String? nToken,
-      nUserId,
-      nUserName,
-      nName,
-      nNik,
-      nLevel,
-      nPhoneNumber;
+  String? nToken, nUserId, nUserName, nName, nNik, nLevel, nPhoneNumber;
 
   void savePref(
     String? nToken,
