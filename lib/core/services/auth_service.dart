@@ -5,7 +5,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:adumas/core/cache/network.dart';
-import 'package:adumas/screens/pages/home.dart';
 import 'package:adumas/screens/pages2/home.dart';
 import 'package:adumas/screens/pages2/postingan.dart';
 import 'package:adumas/widgets/error_handler.dart';

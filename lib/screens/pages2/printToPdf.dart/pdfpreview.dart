@@ -47,10 +47,9 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
 
   Future<Uint8List> makePdf() async {
     final pdf = pw.Document();
-    // final ByteData bytes =
-    //     await rootBundle.load("assets/icon/LogoLelangin.jpg");
-    // final Uint8List byteList = bytes.buffer.asUint8List();
-    final image = await imageFromAssetBundle("assets/icon/LogoLelangin.jpg");
+    final ByteData bytes = await rootBundle.load(widget.image);
+    final Uint8List byteList = bytes.buffer.asUint8List();
+    final image = await imageFromAssetBundle("${widget.image}");
     pdf.addPage(pw.Page(
         margin: const pw.EdgeInsets.all(10),
         pageFormat: PdfPageFormat.a4,
@@ -61,10 +60,10 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
                 pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
-                      pw.Image(image),
+                      // pw.Image(image),
 
-                      // pw.Image(pw.MemoryImage(byteList),
-                      //     fit: pw.BoxFit.fitHeight, height: 100, width: 100)
+                      pw.Image(pw.MemoryImage(byteList),
+                          fit: pw.BoxFit.fitHeight, height: 100, width: 100)
                     ]),
                 // pw.Divider(borderStyle: pw.BorderStyle.dashed),
                 pw.Header(text: "${widget.title}", level: 1),

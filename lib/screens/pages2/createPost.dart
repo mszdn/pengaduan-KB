@@ -7,12 +7,10 @@ import 'package:adumas/core/cache/network.dart';
 import 'package:adumas/core/env.dart';
 import 'package:adumas/core/services/profileservice.dart';
 import 'package:adumas/main.dart';
-import 'package:adumas/screens/pages/createpost.dart';
 import 'package:adumas/screens/pages2/home.dart';
-import 'package:adumas/screens/pages2/postLelang/newpost.dart';
 import 'package:adumas/screens/pages2/postingan.dart';
-import 'package:adumas/screens/pages2/printPdf/save_btn.dart';
 import 'package:adumas/screens/pages2/printToPdf.dart/pdfpreview.dart';
+import 'package:adumas/screens/pages2/savelocal/saveimage.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -138,14 +136,20 @@ class _createPostinganState extends State<createPostingan> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return PdfPreviewPage(
-                    title: titleController.text,
-                    description: descriptionController.text,
-                    image: "${widget.imagenet}",
-                  );
-                }));
+                // Navigator.of(context)
+                //     .push(MaterialPageRoute(builder: (context) {
+                //   return PdfPreviewPage(
+                //     title: titleController.text,
+                //     description: descriptionController.text,
+                //     image: "${widget.imagenet}",
+                //   );
+                // }));
+                Navigator.of(context, rootNavigator: true).push(HRoute(
+                    builder: (context) => saveimage(
+                          title: titleController.text,
+                          description: descriptionController.text,
+                          image: widget.imagenet!,
+                        )));
                 // print("${widget.imagenet}");
               },
               icon: Icon(

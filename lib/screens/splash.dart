@@ -1,7 +1,5 @@
 import 'package:adumas/constant/Hroute.dart';
 import 'package:adumas/core/cache/network.dart';
-import 'package:adumas/screens/pages/createpost.dart';
-import 'package:adumas/screens/pages/home.dart';
 import 'package:adumas/screens/pages2/createPost.dart';
 import 'package:adumas/screens/pages2/home.dart';
 import 'package:adumas/screens/pages2/postingan.dart';
@@ -30,27 +28,6 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  // void onSession() async {
-  //   Future.delayed(
-  //     const Duration(seconds: 3),
-  //     () async {
-  //       //LOGINNYA DISINI
-  //       sessionManager.nToken == null
-  //           ? Navigator.pushAndRemoveUntil(
-  //               context,
-  //               MaterialPageRoute(builder: (_) => const LoginScreen()),
-  //               (route) => false)
-  //           : Navigator.pushAndRemoveUntil(
-  //               context,
-  //               // MaterialPageRoute(builder: (_) => const HomeScreen()),
-  //               //POSTINGAN
-  //               // MaterialPageRoute(builder: (_) =>  Create()),
-
-  //               MaterialPageRoute(builder: (_) =>  Postinganlelang()),
-  //               (route) => false);
-  //     },
-  //   );
-  // }
   void onSession() async {
     if (await Permission.ignoreBatteryOptimizations.isDenied) {
       await Permission.ignoreBatteryOptimizations.request();
