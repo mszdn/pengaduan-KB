@@ -70,7 +70,15 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(child: Icon(Icons.adobe_rounded, size: mediaW / 5)),
+                Center(
+                  child: Image.asset(
+                    "assets/icon/LogoLelanginRm.png",
+                    width: 170,
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
                 const SizedBox(
                   height: 40,
                 ),

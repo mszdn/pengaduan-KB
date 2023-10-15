@@ -128,10 +128,12 @@ class _createPostinganState extends State<createPostingan> {
               color: Colors.black,
             )),
         backgroundColor: Colors.yellow.shade600,
-        title: Text(
-          isEdit ? 'Edit lelang' : 'Tambah lelang',
-          style:
-              const TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
+        title: Center(
+          child: Text(
+            isEdit ? 'Edit lelang' : 'Tambah lelang',
+            style: const TextStyle(
+                fontWeight: FontWeight.w600, color: Colors.black),
+          ),
         ),
         actions: [
           IconButton(

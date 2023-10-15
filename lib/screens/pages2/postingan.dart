@@ -11,7 +11,9 @@ import 'package:adumas/screens/pages2/comments/comment.dart';
 import 'package:adumas/screens/pages2/createPost.dart';
 import 'package:adumas/screens/pages2/postinganSold.dart';
 import 'package:adumas/screens/pages2/printToPdf.dart/cat.dart';
+import 'package:adumas/screens/pages2/profil/profil.dart';
 import 'package:adumas/widgets/WAvatar.dart';
+import 'package:adumas/widgets/WSeeImage.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +35,21 @@ class _PostinganlelangState extends State<Postinganlelang> {
   List items = [];
   bool isLoad = true;
   Dio dio = Dio();
+  String? _token;
+  String? _level;
+  @override
+  void initState() {
+    // level = sessionManager.nLevel;
+    getpost();
+    setState(() {
+      _token = sessionManager.nToken;
+      _level = sessionManager.nLevel;
+    });
+    // _getCamerraPhoto();
+    // TODO: implement initState
+    super.initState();
+  }
+
   Future<dynamic> getpost() async {
     try {
       String token = await getSysToken();
@@ -77,12 +94,12 @@ class _PostinganlelangState extends State<Postinganlelang> {
     }
   }
 
-  String? level;
+  // String? level;
   void checkUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     setState(() {
-      level = prefs.getString('level');
+      // level = prefs.getString('level');
     });
   }
 
@@ -90,7 +107,7 @@ class _PostinganlelangState extends State<Postinganlelang> {
     String id,
   ) async {
     print("jjjj");
-    String _token = await getSysToken();
+    // String _token = await getSysToken();
     Uri url = Uri.parse(
         "https://api.kontenbase.com/query/api/v1/d4197ca7-322a-4e1c-88fc-abd98133eb48/Postingan/$id");
     var res =
@@ -100,71 +117,74 @@ class _PostinganlelangState extends State<Postinganlelang> {
   }
 
   @override
-  void initState() {
-    // level = sessionManager.nLevel;
-    getpost();
-    setState(() {
-      sessionManager.nLevel;
-    });
-    // _getCamerraPhoto();
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton:
-          sessionManager.nLevel == "petugas" || sessionManager.nLevel == "admin"
-              ? SpeedDial(
-                  icon: Icons.add,
-                  backgroundColor: Colors.amber,
-                  children: [
-                      SpeedDialChild(
-                        child: const Icon(Icons.toys),
-                        label: 'Tambah Lelang',
-                        backgroundColor: Colors.amberAccent,
-                        onTap: () {
-                          Navigator.of(context, rootNavigator: true).push(
-                              HRoute(builder: (context) => createPostingan()));
-                        },
-                      ),
-                      sessionManager.nLevel == "admin"
-                          ? SpeedDialChild(
-                              child: const Icon(Icons.people_alt),
-                              label: 'Tambah Petugas',
-                              backgroundColor: Colors.amberAccent,
-                              onTap: () {
-                                Navigator.of(context, rootNavigator: true).push(
-                                    HRoute(
-                                        builder: (context) =>
-                                            const SignupScreenPetugas()));
-                              },
-                            )
-                          : SpeedDialChild()
-                    ])
-              : SizedBox(),
+      floatingActionButton: _level == "petugas" || _level == "admin"
+          ? SpeedDial(
+              icon: Icons.add,
+              backgroundColor: Colors.amber,
+              children: [
+                  SpeedDialChild(
+                    child: const Icon(
+                      Icons.assignment_turned_in_outlined,
+                    ),
+                    label: 'Lelang Terjual',
+                    backgroundColor: Colors.amberAccent,
+                    onTap: () {
+                      Navigator.of(context, rootNavigator: true).push(
+                          HRoute(builder: (context) => PostinganlelangHabis()));
+                    },
+                  ),
+                  SpeedDialChild(
+                    child: const Icon(Icons.toys),
+                    label: 'Tambah Lelang',
+                    backgroundColor: Colors.amberAccent,
+                    onTap: () {
+                      Navigator.of(context, rootNavigator: true).push(
+                          HRoute(builder: (context) => createPostingan()));
+                    },
+                  ),
+                  sessionManager.nLevel == "admin"
+                      ? SpeedDialChild(
+                          child: const Icon(Icons.people_alt),
+                          label: 'Tambah Petugas',
+                          backgroundColor: Colors.amberAccent,
+                          onTap: () {
+                            Navigator.of(context, rootNavigator: true).push(
+                                HRoute(
+                                    builder: (context) =>
+                                        const SignupScreenPetugas()));
+                          },
+                        )
+                      : SpeedDialChild()
+                ])
+          : SizedBox(),
       appBar: AppBar(
         backgroundColor: Colors.yellow.shade600,
-        leading: sessionManager.nLevel == "admin" ||
-                sessionManager.nLevel == "petugas"
-            ? IconButton(
-                onPressed: () {
-                  Navigator.of(context, rootNavigator: true).push(
-                      HRoute(builder: (context) => PostinganlelangHabis()));
-                },
-                icon: Icon(
-                  Icons.assignment_turned_in_outlined,
-                  color: Colors.black,
-                ))
-            : Icon(
-                Icons.abc,
-                color: Colors.yellow.shade600,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context, rootNavigator: true)
+                  .push(HRoute(builder: (context) => ProfileScreen()));
+            },
+            child: CircleAvatar(
+              // radius: 50,
+              maxRadius: 110,
+              backgroundColor: Colors.black,
+              child: CircleAvatar(
+                backgroundColor: Colors.black54,
+                radius: 48,
+                child:
+                    Icon(Icons.person_rounded, color: Colors.white, size: 26),
               ),
+            ),
+          ),
+        ),
         title: Center(
             child: Text(
           "Lelangin",
-          // "${level}",
+          // "${_level}",
           style: TextStyle(color: Colors.black),
         )),
         actions: [
@@ -302,11 +322,25 @@ class _PostinganlelangState extends State<Postinganlelang> {
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 12.0),
-                                            child: AspectRatio(
-                                              aspectRatio: 16 / 9,
-                                              child: Image.network(
-                                                p["attachment"][0]["url"],
-                                                fit: BoxFit.cover,
+                                            child: InkWell(
+                                              onLongPress: () {
+                                                Navigator.of(context,
+                                                        rootNavigator: true)
+                                                    .push(HRoute(
+                                                        builder: (context) =>
+                                                            SeeImage(
+                                                              image:
+                                                                  p["attachment"]
+                                                                          [0]
+                                                                      ["url"],
+                                                            )));
+                                              },
+                                              child: AspectRatio(
+                                                aspectRatio: 16 / 9,
+                                                child: Image.network(
+                                                  p["attachment"][0]["url"],
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
                                           ),
