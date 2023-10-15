@@ -9,6 +9,7 @@ import 'package:adumas/screens/auth/login_screen.dart';
 import 'package:adumas/screens/pages2/comments/comment.dart';
 import 'package:adumas/screens/pages2/createPost.dart';
 import 'package:adumas/widgets/WAvatar.dart';
+import 'package:adumas/widgets/WSeeImage.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -249,14 +250,28 @@ class _PostinganlelangHabisState extends State<PostinganlelangHabis> {
                                           SizedBox(
                                             height: 10,
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 12.0),
-                                            child: AspectRatio(
-                                              aspectRatio: 16 / 9,
-                                              child: Image.network(
-                                                p["attachment"][0]["url"],
-                                                fit: BoxFit.cover,
+                                          InkWell(
+                                            onLongPress: () {
+                                              Navigator.of(context,
+                                                      rootNavigator: true)
+                                                  .push(HRoute(
+                                                      builder: (context) =>
+                                                          SeeImage(
+                                                            image:
+                                                                p["attachment"]
+                                                                    [0]["url"],
+                                                          )));
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 12.0),
+                                              child: AspectRatio(
+                                                aspectRatio: 16 / 9,
+                                                child: Image.network(
+                                                  p["attachment"][0]["url"],
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
                                           ),
